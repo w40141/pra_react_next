@@ -67,20 +67,41 @@
           </tr>
         </tbody>
       </table>
-      <!-- <div class="bg-primary text-white">   -->
-      <!--     primary                           -->
-      <!-- </div>                                -->
-      <!-- <div class="bg-secondary text-white"> -->
-      <!--     secondary                         -->
-      <!-- </div>                                -->
-      <!-- <div class="bg-success text-dark">    -->
-      <!--     success                           -->
-      <!-- </div>                                -->
-      <!-- <div class="bg-warning text-dark">    -->
-      <!--     warning                           -->
-      <!-- </div>                                -->
-      <!-- <div id="root">wait...</div> -->
+      <div id="root">
+          wait...
+      </div>
     </div>
+    <script type="text/babel">
+        let dom = document.querySelector('#root')
+        let title = "React page"
+        let message = "What' s your name?"
+        let in_val = '';
+        let doChange = (event) => {
+            in_val = event.target.value
+            message = 'Hello, ' + in_val + ' !'
+        }
+        let doAction = (event) => {
+            let el = (
+                <div>
+                    <h4>{title}</h4>
+                    <h6>{message}</h6>
+                    <div className='alert alert-primary'>
+                        <div className="form-group">
+                            <label>Input:</label>
+                            <input type="text" className="form-control" id='input' onChange={doChange} />
+                        </div>
+                        <button onClick={doAction} className='btn btn-primary'>
+                            Click
+                        </button>
+                    </div>
+
+                </div>
+            )
+            ReactDOM.render(el, dom)
+        }
+        doAction()
+    </script>
     <!-- <script src="./script.js"></script> -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </body>
 </html>
