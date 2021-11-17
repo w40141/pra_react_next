@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <!-- <meta name="viewport" content="width=device-width" /> -->
     <title>React</title>
     <link
       rel="stylesheet"
@@ -17,91 +16,56 @@
       crossorigin
       src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
     ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
     <h1 class="bg-primary" text-white display-4>React</h1>
-    <div class="container mt-3">
-      <form>
-        <div class="form-group">
-          <label for="id">account</label>
-          <input type="email" value="" id="id" class="form-control" />
-        </div>
-        <div class="form-group">
-          <label for="pass">password</label
-          ><input type="password" value="" id="pass" class="form-control" />
-        </div>
-      </form>
-      <form>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="check" />
-          <label class="form-check-label" for="check">チェックボックス</label>
-        </div>
-        <div class="form-check">
-          <input type="radio" class="form-check-input" id="rb1" name="rb" />
-          <label class="form-check-label" for="rb1">ラジオボタン1</label>
-        </div>
-        <div class="form-check">
-          <input type="radio" class="form-check-input" id="rb2" name="rb" />
-          <label class="form-check-label" for="rb2">ラジオボタン2</label>
-        </div>
-      </form>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Yamada Taro</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Tanaka Hanako</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>SUZUKI Sachiko</td>
-          </tr>
-        </tbody>
-      </table>
-      <div id="root">
-          wait...
-      </div>
+    <div class="container mt-4">
+      <div id="root">wait...</div>
     </div>
     <script type="text/babel">
-        let dom = document.querySelector('#root')
-        let title = "React page"
-        let message = "What' s your name?"
-        let in_val = '';
-        let doChange = (event) => {
-            in_val = event.target.value
-            message = 'Hello, ' + in_val + ' !'
-        }
-        let doAction = (event) => {
-            let el = (
-                <div>
-                    <h4>{title}</h4>
-                    <h6>{message}</h6>
-                    <div className='alert alert-primary'>
-                        <div className="form-group">
-                            <label>Input:</label>
-                            <input type="text" className="form-control" id='input' onChange={doChange} />
-                        </div>
-                        <button onClick={doAction} className='btn btn-primary'>
-                            Click
-                        </button>
-                    </div>
+      let dom = document.querySelector("#root");
+      let message = "React component page.";
 
-                </div>
-            )
-            ReactDOM.render(el, dom)
+      class Rect extends React.Component {
+        x = 0;
+        y = 0;
+        width = 0;
+        height = 0;
+        color = "white";
+        style = {};
+        constructor(props) {
+          super(props);
+          this.x = props.x;
+          this.y = props.y;
+          this.width = props.w;
+          this.height = props.h;
+          this.color = props.c;
+          this.style = {
+            backgroundColor: this.color,
+            position: "absolute",
+            left: this.x + "px",
+            top: this.y + "px",
+            width: this.width + "px",
+            height: this.height + "px",
+          };
         }
-        doAction()
+
+        render() {
+          return <div style={this.style}></div>;
+        }
+      }
+
+      let el = (
+        <div>
+          <h5 className="mb-4">{message}</h5>
+          <div>
+            <Rect x="200" y="200" w="200" h="200" c="cyan" />
+            <Rect x="300" y="300" w="200" h="200" c="magenta" />
+          </div>
+        </div>
+      );
+      ReactDOM.render(el, dom);
     </script>
-    <!-- <script src="./script.js"></script> -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </body>
 </html>
