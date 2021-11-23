@@ -27,18 +27,40 @@ import Rect from "./Rect";
 class App extends Component {
   constructor(props) {
     super();
-    this.title = props.title;
-    this.message = props.message;
+    this.state = {
+      msg: "count start!",
+      count: 0,
+      flag: true,
+    };
+    this.doAction = this.doAction.bind(this);
+  }
+
+  doAction(event) {
+    this.setState({
+      count: this.state.count + 1,
+      msg: "*** count:" + this.state.count + " ***",
+      flag: !this.state.flag,
+    });
   }
   render() {
     return (
       <div>
         <h1 className="bg-primary text-white display-4">React</h1>
         <div className="container">
-          <p className="subtitle">{this.title}</p>
-          <p>{this.message}</p>
-          <Rect x="200" y="200" w="200" h="200" c="cyan" />
-          <Rect x="300" y="300" w="200" h="200" c="magenta" />
+          <p className="subtitle">Show message.</p>
+                    {this.state.flag? 
+          <div className="alert alert-warning text-right">
+            <p className="h5 mb-4">count: {this.state.msg}</p>
+            </div>:
+          <div className="alert alert-warning text-left">
+            <p className="h5 mb-4">{this.state.msg}</p>
+            </div>
+                    }
+          <div className="alert alert-warning text-center">
+            <button className="btn btn-primary" onClick={this.doAction}>
+              Click
+            </button>
+          </div>
         </div>
       </div>
     );
