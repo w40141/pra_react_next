@@ -1,37 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import usePersist from "../Persist";
 
-const AddForm = (props) => {
+const FindForm = (props) => {
   const [memo, setMemo] = usePersist("memo", []);
+  const [fmemo, setFMemo] = usePersist("findMemo", []);
   const [message, setMessage] = useState("");
+  const [mode, setMode] = usePersist("mode", "default");
 
   const doChange = (e) => {
     setMessage(e.target.value);
   };
 
   const doAction = (e) => {
-    const data = {
-      message: message,
-      created: new Date(),
-    };
-    memo.unshift(data);
-    setMemo(memo);
+    if (message === "") {
+      setMode("default");
+      return;
+    }
+
+    let res = memo.filter((item, key) => {
+      return item.message.includes(message);
+    });
+
+    setFMemo(res);
+    setMode("find");
     setMessage("");
   };
 
   return (
-    <form onSubmit={doAction} action="">
+    <form onSubmit={doAction}>
       <div className="form-group row">
         <input
           type="text"
-          className="form-control-sm col"
           onChange={doChange}
           value={message}
-          required
+          className="form-control-sm col"
         />
         <input
           type="submit"
-          value="Add"
+          value="Find"
           className="btn btn-primary btn-sm col-2"
         />
       </div>
@@ -39,4 +45,4 @@ const AddForm = (props) => {
   );
 };
 
-export default AddForm;
+export default FindForm;

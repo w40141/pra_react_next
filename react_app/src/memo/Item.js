@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from "react";
-
 const Item = (props) => {
   const th = { width: "100px" };
   const td = { textAlign: "right", width: "150px" };
