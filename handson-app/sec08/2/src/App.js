@@ -1,22 +1,33 @@
-import logo from "./logo.svg";
+import faker from "faker";
+
 import "./App.css";
-import { useEffect, useState } from "react";
+// import { GitHubUser } from "./GitHubUser";
+// import { LocalStorage } from "./LocalStorage";
+import { RenderProp, List } from "./RenderProp";
+import { FakerItem } from "./FakerItem";
 
-const GitHubUser = (login) => {
-  const [data, setData] = useState();
+const bigList = [...Array(5000)].map(() => ({
+  name: faker.name.findName(),
+  email: faker.internet.email(),
+  avatar: faker.internet.avatar(),
+}));
 
-  useEffect(() => {
-    if (!login) return;
-    fetch(`https://api.github.com/users/${login}`)
-      .then((r) => r.json())
-      .then(setData)
-      .catch(console.error);
-  }, [login]);
-
-  if (data) return <pre>{JSON.stringify(data, null, 2)}</pre>;
-  return null;
-};
+const tahoe_peaks = [
+  { name: "Freel Peak", elevation: 10891 },
+  { name: "Mountment Peak", elevation: 10067 },
+  { name: "Pyramid Peak", elevation: 9983 },
+  { name: "Mt. Tallac", elevation: 9735 },
+];
 
 export default function App() {
-  return <GitHubUser login="w40141" />;
+  // return <LocalStorage login="moonhighway" />;
+  // return <GitHubUser login="moonhighway" />;
+  // return <RenderProp data={tahoe_peaks} />;
+  return (
+    <List
+      data={tahoe_peaks}
+      renderItem={RenderProp}
+      renderEmpty={<p>This list is empty</p>}
+    />
+  );
 }
