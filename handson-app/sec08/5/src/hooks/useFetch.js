@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (uri) => {
+export const useFetch = (uri) => {
   const [data, setData] = useState();
   const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!uri) return;
@@ -16,5 +16,3 @@ const useFetch = (uri) => {
 
   return { loading, data, error };
 };
-
-export {useFetch};

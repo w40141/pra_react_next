@@ -1,12 +1,12 @@
-import { useInput } from "./hooks";
+import React from "react";
+import { useInput } from "./hooks/useInput";
 
-const SearchForm = ({ onSearch }) => {
-  const [searchProps, resetValue] = useInput("");
+const SearchForm = ({ value, onSearch }) => {
+  const [searchProps] = useInput(value);
 
   const submit = (e) => {
     e.preventDefault();
     onSearch(searchProps.value);
-    resetValue();
   };
 
   return (

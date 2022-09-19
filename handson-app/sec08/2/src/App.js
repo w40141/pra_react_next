@@ -1,6 +1,5 @@
 // import faker from "faker";
 
-import "./App.css";
 // import { GitHubUser } from "./GitHubUser";
 import { LocalStorage } from "./LocalStorage";
 import { RenderProp, List } from "./RenderProp";
@@ -23,7 +22,7 @@ const tahoe_peaks = [
 ];
 
 export default function App() {
-  const [login, setLogin] = useState("moontahoe");
+  const [login, setLogin] = useState("w40141");
   return (
     <>
       <SearchForm value={login} onSearch={setLogin} />
